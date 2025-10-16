@@ -4,7 +4,11 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: "https",
-                hostname: "my.alfred.edu",
+                hostname: "**.alfred.edu",
+            },
+            {
+                protocol: "https",
+                hostname: "images.pexels.com",
             },
         ],
     },
