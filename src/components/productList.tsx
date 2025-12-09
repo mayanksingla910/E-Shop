@@ -3,6 +3,7 @@ import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
 import DOMPurify from "isomorphic-dompurify";
+import Pagination from "./pagination";
 
 const PRODUCT_PER_PAGE = 8;
 
@@ -33,7 +34,6 @@ const ProductList = async ({
         ? parseInt(searchParams.page) * (limit || PRODUCT_PER_PAGE)
         : 0
     );
-  // .find();
 
   if (searchParams?.sort) {
     const [sortType, sortBy] = searchParams.sort.split(" ");
@@ -76,7 +76,7 @@ const ProductList = async ({
           </div>
           <div className="flex justify-between">
             <span className="font-medium">{product.name}</span>
-            <span className="font-semibold">${product.price?.price}</span>
+            <span className="font-semibold">${product.priceData?.price}</span>
           </div>
           {product.additionalInfoSections && (
             <div
@@ -95,13 +95,13 @@ const ProductList = async ({
           </button>
         </Link>
       ))}
-      {/* {searchParams?.cat || searchParams?.name ? (
-        // <Pagination
-        //   currentPage={res.currentPage || 0}
-        //   hasPrev={res.hasPrev()}
-        //   hasNext={res.hasNext()}
-        // />
-      ) : null} */}
+      {searchParams?.cat || searchParams?.name ? (
+        <Pagination
+          currentPage={res.currentPage || 0}
+          hasPrev={res.hasPrev()}
+          hasNext={res.hasNext()}
+        />
+      ) : null}
     </div>
   );
 };
