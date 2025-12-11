@@ -1,7 +1,9 @@
 import Link from "next/link";
 import Menu from "./menu";
 import SearchBar from "./searchBar";
-import NavIcons from "./navIcons";
+import dynamic from "next/dynamic";
+
+const NavIcons = dynamic(() => import("./navIcons"), { ssr: false });
 
 export default function Navbar() {
   return (
