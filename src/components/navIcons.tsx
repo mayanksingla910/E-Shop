@@ -51,7 +51,7 @@ export default function NavIcons() {
       />
       {isProfileOpen && (
         <div className="absolute p-4 top-10 bg-white left-0 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] text-sm z-20">
-          <Link href="/">Profile</Link>
+          <Link href="/profile">Profile</Link>
           <div className="mt-2 cursor-pointer">
             {isLoading ? "Logging out..." : "Logout"}
           </div>
