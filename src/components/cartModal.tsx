@@ -7,7 +7,6 @@ import { useWixClient } from "@/hooks/useWixClient";
 import { currentCart } from "@wix/ecom";
 
 const CartModal = () => {
-
   const wixClient = useWixClient();
   const { cart, isLoading, removeItem } = useCartStore();
 
@@ -35,9 +34,18 @@ const CartModal = () => {
     }
   };
 
+  console.log(cart);
+
+  const subtotal =
+    cart.lineItems?.reduce((total, item) => {
+      const price = Number(item.price?.amount ?? 0);
+      const qty = Number(item.quantity ?? 0);
+      return total + price * qty;
+    }, 0) ?? 0;
+
   return (
     <div className="w-max absolute p-4 rounded-md shadow-[0_3px_10px_rgb(0,0,0,0.2)] bg-white top-12 right-0 flex flex-col gap-6 z-20">
-      {!cart.lineItems ? (
+      {!cart.lineItems || cart.lineItems.length === 0 ? (
         <div className="">Cart is Empty</div>
       ) : (
         <>
@@ -102,7 +110,7 @@ const CartModal = () => {
           <div className="">
             <div className="flex items-center justify-between font-semibold">
               <span className="">Subtotal</span>
-              <span className="">${cart.subtotal.amount}</span>
+              <span className="">${subtotal.toFixed(2)}</span>
             </div>
             <p className="text-gray-500 text-sm mt-2 mb-4">
               Shipping and taxes calculated at checkout.
