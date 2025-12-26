@@ -1,7 +1,6 @@
 import CategoryList from "@/components/categoryList";
 import ProductList from "@/components/productList";
 import Slider from "@/components/slider";
-import { wixClientServer } from "@/lib/wixClientServer";
 import { Suspense } from "react";
 
 const HomePage = async () => {
