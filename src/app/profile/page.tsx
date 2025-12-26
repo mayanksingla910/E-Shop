@@ -1,9 +1,13 @@
+export const dynamic = "force-dynamic";
+
 import UpdateButton from "@/components/updateButton";
 import { updateUser } from "@/lib/action";
 import { wixClientServer } from "@/lib/wixClientServer";
 import { members } from "@wix/members";
 import Link from "next/link";
 import { format } from "timeago.js";
+
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const wixClient = await wixClientServer();
@@ -13,7 +17,7 @@ const ProfilePage = async () => {
   });
 
   if (!user.member?.contactId) {
-    return <div className="">Not logged in!</div>;
+    redirect("/login");
   }
 
   const orderRes = await wixClient.orders.searchOrders({
